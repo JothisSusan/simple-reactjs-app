@@ -6,9 +6,16 @@ pipeline {
         }
     }
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
-                sh 'npm install' 
+                sh 'node --version'
+                sh 'npm install'
+                sh 'npm run build'
+            }
+        }
+        stage ('Deliver') {
+            steps {
+                sh 'readlink -f ./package.json'
             }
         }
     }
