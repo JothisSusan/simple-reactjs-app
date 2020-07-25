@@ -13,10 +13,5 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage ('Deliver') {
-            steps {
-                sh 'readlink -f ./package.json'
-            }
-        }
     }
 }
