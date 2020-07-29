@@ -1,15 +1,18 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:alpine:14.0.6'
-            args '-p 3000:3000'
-        }
-    }
-    stages {
-        stage('Build') {
+    agent any
+    stages{
+	stage ('checkout') {
+	    steps{
+		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/raamstar/simple-reactjs-app.git']]])
+	}
+	}
+	    
+	stage('Submit Stack') {
             steps {
-                sh 'npm install'
-            }
-        }
-    }
+		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {	     
+				    sh "aws cloudformation create-stack --stack-name mynewstack4 --template-body file://stack.json --capabilities CAPABILITY_IAM --region us-east-1"
+		    }
+          }    
+  }
+}
 }
