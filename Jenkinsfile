@@ -22,7 +22,7 @@ pipeline {
 		    // {
 		     
 				    powershell "echo $env.WORKSPACE"
-				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
+				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/StackTemplate.json --region 'us-east-1'"
 		     sh "sudo -su"	    
 		     sh "apt-get update -qq"
         	     sh "apt-get install -y apt-transport-https ca-certificates"
