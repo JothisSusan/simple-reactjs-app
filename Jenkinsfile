@@ -9,7 +9,7 @@ pipeline {
 	    
 	stage('Submit Stack') {
             steps {
-		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {	     
+		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: '', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {	     
 				    sh "aws cloudformation create-stack --stack-name mynewstack --template-body file://Stacktemplate.json --capabilities CAPABILITY_IAM --region us-east-1"
 		    }
           }    
