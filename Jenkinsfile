@@ -1,8 +1,8 @@
 pipeline {
+    agent any
 	environment {
         PATH = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0"
     }
-    agent any
     stages{
 	stage ('checkout') {
 	    steps{
