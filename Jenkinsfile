@@ -10,10 +10,10 @@ pipeline {
 	    
 	stage('Submit Stack') {
             steps {
-		    //powershell "echo $env.WORKSPACE"
+		    powershell "echo $env.WORKSPACE"
 		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {	     
-				    //powershell "echo $env.WORKSPACE"
-				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://StackTemplate.json --region 'us-east-1'"
+				    powershell "echo $env.WORKSPACE"
+				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/StackTemplate.json --region 'us-east-1'"
 		    }
 		    script{
 			
@@ -21,8 +21,8 @@ pipeline {
 			    // withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAXA633C7CVYMMLNP3', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) 
 		    // {
 		     
-				   // powershell "echo $env.WORKSPACE"
-				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://StackTemplate.json --region 'us-east-1'"
+				    powershell "echo $env.WORKSPACE"
+				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/StackTemplate.json --region 'us-east-1'"
 		     sh "sudo -su"	    
 		     sh "apt-get update -qq"
         	     sh "apt-get install -y apt-transport-https ca-certificates"
