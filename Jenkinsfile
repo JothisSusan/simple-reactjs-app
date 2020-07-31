@@ -17,8 +17,7 @@ pipeline {
 		    }
 		    script{
 			
-			withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-			    // withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAXA633C7CVYMMLNP3', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) 
+			withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) { 
 		    // {
 		     
 				    powershell "echo $env.WORKSPACE"
