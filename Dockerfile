@@ -1,10 +1,13 @@
-FROM mhart/alpine-node:11 AS builder
-WORKDIR /app
-COPY . .
-RUN yarn run build
+FROM node:14
 
-FROM mhart/alpine-node
-RUN yarn global add serve
-WORKDIR /app
-COPY --from=builder /app/build .
-CMD ["serve", "-p", "80", "-s", "."]
+WORKDIR '/app'
+EXPOSE 8080
+COPY package.json .
+
+RUN npm install -g create-react-app
+RUN npm install 
+RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm install --save react react-dom react-scripts
+
+COPY . ./
+CMD ["npm", "start"]
