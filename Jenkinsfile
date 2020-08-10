@@ -7,34 +7,38 @@ pipeline {
   }
   agent any
   stages{
-    stage ('Checkout') 
-	  {
+  	stage ('Checkout') 
+	{
 	    steps
-      {
-        echo "SCM Checkout"
-		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JothisSusan/simple-reactjs-app.git']]])
+	    {
+		echo "SCM Checkout"
+		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JothisSusan/simple-reactjs-app.git']]])
+	    }
+	}
+	    stage ('Build Docker Image') 
+	    {
+	      steps
+	      {
+		echo "Building Docker Image"
+		      script
+		      {
+		      	dockerImage= docker.build registry = ":$BUILD_NUMBER"
+		      }
+	      }
+	    }
+	    stage ('Push Docker Image') 
+	    {
+	      steps
+	      {
+		echo "Pushing Docker Image"
+	      }
+	    }
+	    stage ('Deploy to Dev') 
+	    {
+	      steps
+	      {
+		echo "Deploying to Dev Environment"
+	      }
 	    }
 	  }
-    stage ('Build Docker Image') 
-    {
-      steps
-      {
-        echo "Building Docker Image"
-      }
-    }
-    stage ('Push Docker Image') 
-    {
-      steps
-      {
-        echo "Pushing Docker Image"
-      }
-    }
-    stage ('Deploy to Dev') 
-    {
-      steps
-      {
-        echo "Deploying to Dev Environment"
-      }
-    }
-  }
-}
+	}
