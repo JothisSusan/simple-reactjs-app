@@ -4,7 +4,7 @@ FROM node:14
 # set working directory
 WORKDIR '/app'
 
-
+EXPOSE 8080
 
 # install app dependencies
 COPY package.json .
