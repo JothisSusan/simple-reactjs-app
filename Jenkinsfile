@@ -13,12 +13,6 @@ pipeline {
 			checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JothisSusan/simple-reactjs-app.git']]])
 	    	}
 	}
-	stage('install dependendience') {
-      		steps {
-		  echo 'installing dependencies'
-		  sh 'npm install'
-            	}
-    	}
         stage('build the project') {
                 steps {
        		 echo 'building the project'
