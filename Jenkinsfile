@@ -12,12 +12,6 @@ pipeline {
 			echo "SCM Checkout"
 			checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JothisSusan/simple-reactjs-app.git']]])
 	    	}
-	}
-        stage('build the project') {
-                steps {
-       		 echo 'building the project'
-       		 sh 'npm run build'
-		}
    	}
 	stage ('Build Docker Image'){
 	      steps
