@@ -31,13 +31,19 @@ pipeline {
 	      steps
 	      {
 		echo "Pushing Docker Image"
+	      script {
+          docker.withRegistry( '', registryCredential ) {
+              dockerImage.push()
+              dockerImage.push('latest')
+		  }
+		}
 	      }
 	    }
-	    stage ('Deploy to Dev') 
-	    {
-	      steps
-	      {
+	    stage ('Deploy to Dev') {
+	      steps{
 		echo "Deploying to Dev Environment"
+		sh "docker rm -f petclinic || true"
+		sh "docker run -d --name=simple-react-app -p 8081:8080 jothissusan/simple-react-app"
 	      }
 	    }
 	  }
