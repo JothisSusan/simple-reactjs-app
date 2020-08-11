@@ -28,7 +28,7 @@ Resources:
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
-          docker run -d -p 3000:3000 plmnko098/simple-react-app
+          docker run -d -p 3000:3000 jothissusan/simple-react-app
 
   MyInstance2:
     Type: AWS::EC2::Instance
@@ -48,7 +48,7 @@ Resources:
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
-          docker run -d -p 3000:3000 plmnko098/simple-react-app
+          docker run -d -p 3000:3000 jothissusan/simple-react-app
 
   ELBSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
