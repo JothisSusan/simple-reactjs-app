@@ -18,7 +18,7 @@ RUN npm run build
 FROM nginx:1.16.0-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d
+#COPY nginx/nginx.conf /etc/nginx/conf.d
 
 #fire for nginx
 EXPOSE 80
